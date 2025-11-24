@@ -5,7 +5,7 @@
 import sys
 import socket
 import select
-#select() purpose is it looks at a whole set of sockets and tells you which ones have data to be recv
+#using select() to connect at a set of sockets and tells you which ones have data to be receive
 
 def run_server(port):
     # create socket
