@@ -5,7 +5,7 @@
 import sys
 import socket
 import select
-#select() point is it looks at a whole set of sockets and tells you which ones have data to be recv
+#select() purpose is it looks at a whole set of sockets and tells you which ones have data to be recv
 
 def run_server(port):
     # create socket
@@ -19,7 +19,7 @@ def run_server(port):
     read_set = set()
     wlist = set()
     elist = set()
-    # when the listening socket shows up as ready to read it means there is an coming connection to accept()
+
     s_socket.listen()
     read_set.add(s_socket)
     print('waiting for connections')
@@ -32,7 +32,6 @@ def run_server(port):
             if s == s_socket:
                 # accept new connections
                 new_socket, new_socket_addr_info = s_socket.accept()
-                #add to the set
                 read_set.add(new_socket)
 
                 #print message stating connection
