@@ -1,7 +1,7 @@
 import socket 
 import sys
 import select
-from chatui import init_windows, read_command, print_message, end_windows
+
 
 #accept multiple connections sent from multiple clients to a default port
 #use select to be the accountent of whos in the chat
@@ -28,12 +28,12 @@ def run_server(port):
                 print(f"({host}, {port}): connected")
             else:
                 data = s.recv(4096)
-                message = data.decode('ISO-8859-1')
-                message_buffer[host] = message
-                print("key", host, "message", message_buffer[host])
+                client_message = data.decode('ISO-8859-1')
+                message_buffer[host] = client_message.replace("\r\n", "")
+                # print("key:", host, "message:", message_buffer[host])
 
-                if message.endswith("\r\n"):
-                    welcome_message = f"Welcome {message}"
+                if client_message.endswith("\r\n"):
+                    welcome_message = f"Welcome {client_message}"
                     new_socket.send(welcome_message.encode("ISO-8859-1"))
                     new_socket.close()
                     chat_connections.remove(s)
